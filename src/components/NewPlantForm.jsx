@@ -1,13 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 
-function NewPlantForm() {
+function NewPlantForm({ addPlant }) {
+  // State to manage form input values
+  const [formData, setFormData] = useState({
+    name: "",
+    image: "",
+    price: "",
+  });
+
+  // Handler for input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handler for form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newPlant = {
+      ...formData,
+    };
+
+    // POST request to add new plant to backend
+    fetch("http://localhost:6001/plants", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPlant),
+    })
+      .then((r) => r.json())
+      .then((plant) => {
+        // Add the new plant to the parent state
+        addPlant(plant);
+        // Reset form
+        setFormData({ name: "", image: "", price: "" });
+      });
+  };
+
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
-      <form>
-        <input type="text" name="name" placeholder="Plant name" />
-        <input type="text" name="image" placeholder="Image URL" />
-        <input type="number" name="price" step="0.01" placeholder="Price" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Plant name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="image"
+          placeholder="Image URL"
+          value={formData.image}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          name="price"
+          step="0.01"
+          placeholder="Price"
+          value={formData.price}
+          onChange={handleChange}
+        />
         <button type="submit">Add Plant</button>
       </form>
     </div>

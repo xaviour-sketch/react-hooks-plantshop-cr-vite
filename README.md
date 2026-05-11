@@ -1,93 +1,67 @@
-# Phase 2 Code Challenge: Plantsy
+# Plantsy - Plant Shop Management App
 
-## Demo
+A React application for managing a plant shop inventory. Users can view all plants, add new plants, mark plants as sold out, and search for plants by name.
 
-Use this gif as an example of how the app should work.
+## Screenshots
 
-![Demo GIF](./demo.gif)
+![App Screenshot](./screenshot.png)
 
-## Instructions
+## Features
 
-Welcome to Plantsy! You've been tasked with building out some features for the
-admin side of a plant store. The designers have put together the components and
-CSS. Now it's up to you to bring the features to life by adding stateful logic
-as well as persisting data to the backend via our API.
+- **View All Plants**: Displays all plants from the backend on app startup
+- **Add New Plants**: Submit a form to add new plants to the inventory
+- **Mark as Sold Out**: Toggle plants between "In Stock" and "Out of Stock" (client-side only)
+- **Search Plants**: Filter plants by name in real-time
 
-Your job will be to make our app work according to the user stories you will
-find the [Deliverables](#Deliverables) section.
+## Tech Stack
 
-## Setup
+- **Frontend**: React 18, Vite
+- **Backend**: JSON Server (for development)
+- **Testing**: Vitest, React Testing Library
+- **Styling**: CSS
 
-1. Run `npm install` in your terminal.
-2. Run `npm run server`. This will run your backend on port `6001`.
-3. In a new terminal, run `npm run dev`.
+## Installation
 
-Make sure to open [http://localhost:6001/plants](http://localhost:6001/plants)
-in the browser to verify that your backend is working before you proceed!
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run server` to start the backend on port 6001
+4. In a new terminal, run `npm run dev` to start the frontend on port 5173
 
-## Endpoints
+## Usage
 
-The base URL for your backend is: `http://localhost:6001`
+1. Open [http://localhost:5173](http://localhost:5173) in your browser
+2. View all plants loaded from the backend
+3. Use the form to add new plants
+4. Click "In Stock" buttons to mark plants as sold out
+5. Use the search bar to filter plants by name
 
-## Deliverables
+## API Endpoints
 
-As a user:
+### GET /plants
+Returns all plants in the inventory.
 
-1. When the app starts, I can see all plants.
-2. I can add a new plant to the page by submitting the form.
-3. I can mark a plant as "sold out".
-4. I can search for plants by their name and see a filtered list of plants.
+### POST /plants
+Adds a new plant to the inventory.
 
-### Endpoints for Core Deliverables
-
-#### GET /plants
-
-Example Response:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Aloe",
-    "image": "./images/aloe.jpg",
-    "price": 15.99
-  },
-  {
-    "id": 2,
-    "name": "ZZ Plant",
-    "image": "./images/zz-plant.jpg",
-    "price": 25.98
-  }
-]
-```
-
-#### POST `/plants`
-
-Required Headers:
-
-```js
-{
-  "Content-Type": "application/json"
-}
-```
-
-Request Object:
-
+**Request Body:**
 ```json
 {
   "name": "string",
   "image": "string",
-  "price": number
+  "price": "string"
 }
 ```
 
-Example Response:
+## Testing
 
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 15.99
-}
-```
+Run `npm run test` to execute the test suite.
+
+## Contributing
+
+1. Create a feature branch
+2. Make changes and run tests
+3. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
